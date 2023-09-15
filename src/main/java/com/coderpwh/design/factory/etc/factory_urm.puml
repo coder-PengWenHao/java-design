@@ -1,46 +1,47 @@
 @startuml
 package com.coderpwh.factory{
-
-
   class App{
-   - LOGGER: Logger
+   ~ LOGGER: Logger
    + App()
    + main(args:String[])
   }
 
-  class CoinFactory{
+  class  CoinFactory{
    + CoinFactory()
    + getCoin(type:CoinType):Coin
   }
 
-  enum CoinType{
-   + COPPER
-   + GOLD
-   - constructor: Supplier<Coin>
-   + getConstructor():Supplier<Coin>
-   + valueOf(name:String): CoinType
-   + values(): CoinType[]
-  }
 
- interface Coin{
-  + getDescription(){abstract}
+ enum CoinType{
+  + GOPPER {static}
+  + GOLD {static}
+  - constructor: Supplier<Coin>
+  + getConstructor(): Supplier<Coin>
+  + valueOf(name:String):CoinType
+  + values(): CoinType[]
  }
 
-   class GoldCoin{
+
+
+ interface Coin{
+  + getDescription():String
+ }
+
+ class CopperCoin{
      ~ DESCRIPTION: String {static}
-     + GoldCoin():String
-     + getDescription()
-   }
+     + CopperCoin()
+     + getDescription():String
+ }
 
-  class CopperCoin{
-  ~ DESCRIPTION: String {static}
-  + CopperCoin()
-  + getDescription()
-  }
+ class  GoldCoin{
+   ~ DESCRIPTION: String {static}
+   + GoldCoin()
+   + getDescription():String
+ }
 
 
-CopperCoin ..|> Coin
-GoldCoin ..|> Coin
+ GoldCoin ..|> Coin
+ CopperCoin ..|> Coin
 
 }
 @enduml
